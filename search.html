@@ -1,40 +1,18 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Поиск авиабилетов</title>
-    <script>
-        function searchFlights(event) {
-            event.preventDefault(); // Предотвращаем отправку формы
+function searchFlights(event) {
+    event.preventDefault(); // Предотвращаем отправку формы
 
-            const from = document.getElementById('from').value;
-            const to = document.getElementById('to').value;
-            const departure = document.getElementById('departure').value;
-            const returnDate = document.getElementById('return').value;
+    const from = document.getElementById('from').value;
+    const to = document.getElementById('to').value;
+    const departure = document.getElementById('departure').value;
+    const returnDate = document.getElementById('return').value;
 
-            // Создаем URL с параметрами
-            const searchUrl = `https://avialoop.github.io/search?from=${from}&to=${to}&departure=${departure}&return=${returnDate}`;
-            window.location.href = searchUrl; // Перенаправляем на новый URL
-        }
-    </script>
-</head>
-<body>
-    <h1>Поиск авиабилетов</h1>
-    <form id="searchForm" onsubmit="searchFlights(event)">
-        <label for="from">Откуда:</label>
-        <input type="text" id="from" required>
+    // Проверяем, что все поля заполнены
+    if (!from || !to || !departure || !returnDate) {
+        alert("Пожалуйста, заполните все поля.");
+        return;
+    }
 
-        <label for="to">Куда:</label>
-        <input type="text" id="to" required>
-
-        <label for="departure">Дата вылета:</label>
-        <input type="date" id="departure" required>
-
-        <label for="return">Дата возвращения:</label>
-        <input type="date" id="return" required>
-
-        <button type="submit">Найти</button>
-    </form>
-</body>
-</html>
+    // Создаем URL с параметрами
+    const searchUrl = `https://avialoop.github.io/search?from=${from}&to=${to}&departure=${departure}&return=${returnDate}`;
+    window.location.href = searchUrl; // Перенаправляем на новый URL
+}
